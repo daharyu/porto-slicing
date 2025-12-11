@@ -1,11 +1,11 @@
 import CustomCard from '@/components/customCard/page';
-import { Button } from '@/components/ui/button';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@radix-ui/react-accordion';
+} from '@/components/ui/accordion';
+import { Button } from '@/components/ui/button';
 import { MinusCircle, PlusCircle } from 'lucide-react';
 import Image from 'next/image';
 
@@ -54,20 +54,6 @@ const FAQPage = () => {
                 <AccordionItem value={`item-${index}`} key={index}>
                   <AccordionTrigger className='text-md data-[state=open]:text-primary-300 my-lg md:my-2xl flex w-full justify-between text-left leading-[30px] font-semibold md:text-xl md:leading-[34px] [&[data-state=closed]_svg[data-minus]]:hidden [&[data-state=open]_svg[data-plus]]:hidden'>
                     What’s your approach to front-end development?
-                    <PlusCircle
-                      data-plus
-                      color='white'
-                      fill='#6600EB'
-                      size={40}
-                      className='size-6 shrink-0 transition-transform duration-200 md:size-10'
-                    />
-                    <MinusCircle
-                      fill='#6600EB'
-                      data-minus
-                      color='white'
-                      size={40}
-                      className='size-6 shrink-0 transition-transform duration-200 md:size-10'
-                    />
                   </AccordionTrigger>
                   <AccordionContent className='flex flex-col gap-4 text-balance'>
                     <p className='md:text-md text-sm leading-7 text-neutral-700 md:leading-[30px]'>

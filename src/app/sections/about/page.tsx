@@ -12,7 +12,7 @@ const AboutMe = () => {
       {/* Text */}
       <div className='gap-lg md:gap-xl flex flex-col'>
         <h6 className='text-md leading-[30px] font-semibold md:text-lg md:leading-[32px]'>
-          Hi, I’m Edwin Anderson 👋
+          Hi, I’m Bernardus David H Y 👋
         </h6>
         <p className='md:text-display-md text-xl leading-[34px] font-semibold md:leading-[46px] md:tracking-tight'>
           Building digital products with a focus on crafting visually engaging
@@ -25,12 +25,11 @@ const AboutMe = () => {
       </div>
 
       {/* Container */}
-      <div className='gap-xl md:gap-2xl grid w-full grid-cols-1 md:w-[1184px] md:grid-cols-3'>
+      <div className='gap-xl md:gap-2xl grid w-full grid-cols-1 md:grid-cols-3'>
         {/* Card 1 */}
         <CustomCard className='bg-secondary-300 relative'>
           <div className='gap-md md:gap-xl m-6 flex flex-col text-white'>
             <h5 className='text-display-sm md:text-display-md leading-[38px] font-bold md:leading-[46px] md:tracking-tight'>
-              {' '}
               Why Choose Me
             </h5>
             <p className='md:text-md text-sm leading-7 md:leading-[30px]'>

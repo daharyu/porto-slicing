@@ -36,11 +36,17 @@ const AccordionTrigger = React.forwardRef<
       <div className='ml-2 flex h-4 w-4 items-center justify-center'>
         <PlusCircle
           data-plus
-          className='h-4 w-4 shrink-0 transition-transform duration-200'
+          color='white'
+          fill='#6600EB'
+          size={40}
+          className='size-6 shrink-0 transition-transform duration-200 md:size-10'
         />
         <MinusCircle
+          fill='#6600EB'
           data-minus
-          className='h-4 w-4 shrink-0 transition-transform duration-200'
+          color='white'
+          size={40}
+          className='size-6 shrink-0 transition-transform duration-200 md:size-10'
         />
       </div>
     </AccordionPrimitive.Trigger>

@@ -9,29 +9,68 @@ import {
 } from '@/components/ui/sheet';
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogTitle,
   AlertDialogTrigger,
 } from '@radix-ui/react-alert-dialog';
 import { Mail } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { AlertDialogFooter, AlertDialogHeader } from '../ui/alert-dialog';
 import CustomCard from '../customCard/page';
+import { useEffect, useState } from 'react';
 
 const HeaderPage = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { scrollY } = useScroll();
+  const paddingY = useTransform(scrollY, [0, 100], [24, 12], { clamp: true });
+  const background = useTransform(
+    scrollY,
+    [0, 250],
+    ['rgba(255,255,255,0)', 'rgba(255,255,255,0.95)']
+  );
+  const backdropBlur = useTransform(
+    scrollY,
+    [0, 250],
+    ['blur(0px)', 'blur(12px)']
+  );
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 250);
+    };
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <>
-      <header
-        className={`py-7xl px-xl md:px-10xl flex-center text-neutral-25 fixed top-0 z-40 h-[80px] w-[393px] justify-between bg-transparent backdrop-blur-xs md:h-[85px] md:w-[1440px]`}
+      <motion.header
+        style={{
+          paddingTop: paddingY,
+          paddingBottom: paddingY,
+          background,
+          backdropFilter: backdropBlur,
+          WebkitBackdropFilter: backdropBlur,
+        }}
+        className={`py-7xl px-xl md:px-10xl flex-center text-neutral-25 fixed top-0 z-40 h-[80px] w-full justify-between bg-transparent backdrop-blur-xs md:h-[85px] ${isScrolled ? 'bg-white shadow-sm' : 'border-transparent'}`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
       >
         {/* Logo */}
         <div className='flex gap-[8.53px]'>
-          <Image src='/logo-symbol.svg' alt='logo' width={27} height={29} />
-          <div className='leading-4xl text-[21.33px] font-semibold'>
+          <Image
+            src='/logo-symbol.svg'
+            alt='logo'
+            width={27}
+            height={29}
+            className={`${isScrolled && 'invert'}`}
+          />
+          <div
+            className={`leading-4xl text-[21.33px] font-semibold ${isScrolled ? 'text-neutral-950!' : 'text-white'}`}
+          >
             Your Logo
           </div>
         </div>
@@ -40,8 +79,11 @@ const HeaderPage = () => {
         <nav className='hidden md:block'>
           <ul className='gap-4xl flex'>
             {navigationData.map((data) => (
-              <li key={data.label} className='p-md'>
-                <Link href={data.href} className=''>
+              <li
+                key={data.label}
+                className={`p-md ${isScrolled ? 'text-neutral-950!' : 'text-white'}`}
+              >
+                <Link href={data.href} className='cursor-pointer'>
                   {data.label}
                 </Link>
               </li>
@@ -52,8 +94,10 @@ const HeaderPage = () => {
         {/* Hire Me */}
         <div className='hidden md:block'>
           <AlertDialog>
-            <AlertDialogTrigger>
-              <Button className='h-[48px] w-[172px] md:flex'>
+            <AlertDialogTrigger asChild>
+              <Button
+                className={`h-[48px] w-[172px] md:flex ${isScrolled && 'invert'}`}
+              >
                 <Mail size={20} />
                 Hire Me
               </Button>
@@ -132,7 +176,7 @@ const HeaderPage = () => {
             </SheetHeader>
           </SheetContent>
         </Sheet>
-      </header>
+      </motion.header>
     </>
   );
 };

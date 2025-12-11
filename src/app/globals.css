@@ -280,7 +280,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground font-family mx-auto w-[393px] overflow-x-hidden md:w-[1440px];
+    @apply bg-background text-foreground font-family mx-auto w-[393px] overflow-x-hidden md:w-full;
   }
   .flex-center {
     @apply flex items-center justify-center;
