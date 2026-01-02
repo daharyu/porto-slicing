@@ -26,7 +26,7 @@ const FooterPage = () => {
 
           {/* Copyright */}
           <p className='text-sm leading-7'>
-            © 2025 Edwin Anderson. All rights reserved.
+            ©2025 Bernardus David H Y. All rights reserved.
           </p>
         </div>
 
