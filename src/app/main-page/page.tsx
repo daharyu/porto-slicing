@@ -21,7 +21,7 @@ const MainPage = () => {
       <ChooseMePage />
       <WorkPage />
 
-      <ClientStory />
+      {/* <ClientStory /> */}
       <FAQPage />
       <ContactPage />
       <FooterPage />

@@ -1,4 +1,7 @@
+'use client';
+import { skillData } from '@/app/constants/skill-data';
 import CustomCard from '@/components/customCard/page';
+import AnimatedProgressBar from '@/components/smoothui/animated-progress-bar';
 import {
   Pagination,
   PaginationContent,
@@ -7,9 +10,18 @@ import {
 } from '@/components/ui/pagination';
 import { Progress } from '@/components/ui/progress';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 
 const SkillPage = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
+
+  // Calculate the index range
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  // Slice the data to show only 3 items
+  const currentItems = skillData.slice(indexOfFirstItem, indexOfLastItem);
   return (
     <>
       <section className='section' id='skill'>
@@ -20,238 +32,61 @@ const SkillPage = () => {
         {/* Card Container */}
         <div className='gap-xl md:gap-2xl grid grid-cols-1 md:grid-cols-2'>
           {/* Card 1 */}
-          <CustomCard className='md:p-xl p-lg flex h-[172px] flex-col shadow-md shadow-[#A5A5A533] md:h-[185px]'>
-            {/* Text Desc */}
-            <div className='gap-md flex flex-col'>
-              {/* Judul */}
-              <div className='gap-lg flex'>
-                <div className='flex-center size-10 rounded-full bg-neutral-100'>
-                  <Image
-                    src='/images/ES2.svg'
-                    alt='skill1'
-                    width={25}
-                    height={100}
-                  />
+          {currentItems.map((data) => (
+            <CustomCard
+              className='md:p-xl p-lg flex h-[172px] flex-col shadow-md shadow-[#A5A5A533] md:h-[185px]'
+              key={data.name}
+            >
+              {/* Text Desc */}
+              <div className='gap-md flex flex-col'>
+                {/* Judul */}
+                <div className='gap-lg flex'>
+                  <div className='flex-center size-10 rounded-full bg-neutral-100'>
+                    <Image
+                      src={data.icon}
+                      alt='skill1'
+                      width={25}
+                      height={100}
+                      className={`${data.name === 'GitHub' && 'invert'}`}
+                    />
+                  </div>
+                  <div className='gap-md flex flex-col'>
+                    <h3 className='text-md my-auto leading-[30px] font-semibold md:text-lg md:leading-[32px]'>
+                      {data.name}
+                    </h3>
+                  </div>
                 </div>
-                <div className='gap-md flex flex-col'>
-                  <h3 className='text-md my-auto leading-[30px] font-semibold md:text-lg md:leading-[32px]'>
-                    HTML
-                  </h3>
-                </div>
+
+                {/* Deskripsi */}
+                <p className='md:text-md text-sm leading-7 md:leading-[30px]'>
+                  {data.desc}
+                </p>
               </div>
 
-              {/* Deskripsi */}
-              <p className='md:text-md text-sm leading-7 md:leading-[30px]'>
-                Building the structure of web pages with semantic markup for
-                accessibility .
-              </p>
-            </div>
-
-            {/* Progress Bar */}
-            <div className='gap-xl flex'>
-              <Progress value={90} className='my-auto rounded-full' />
-              <span className='md:text-md text-sm leading-7 font-semibold md:leading-[30px]'>
-                90%
-              </span>
-            </div>
-          </CustomCard>
-
-          {/* Card 2 */}
-          <CustomCard className='md:p-xl p-lg flex h-[172px] flex-col shadow-md shadow-[#A5A5A533] md:h-[185px]'>
-            {/* Text Desc */}
-            <div className='gap-md flex flex-col'>
-              {/* Judul */}
-              <div className='gap-lg flex'>
-                <div className='flex-center size-10 rounded-full bg-neutral-100'>
-                  <Image
-                    src='/images/ES0.svg'
-                    alt='skill2'
-                    width={25}
-                    height={100}
-                  />
-                </div>
-                <div className='gap-md flex flex-col'>
-                  <h3 className='text-md my-auto leading-[30px] font-semibold md:text-lg md:leading-[32px]'>
-                    CSS
-                  </h3>
-                </div>
+              {/* Progress Bar */}
+              <div className='gap-xl flex'>
+                <AnimatedProgressBar value={data.score} />
+                <span className='md:text-md text-sm leading-7 font-semibold md:leading-[30px]'>
+                  {data.score}%
+                </span>
               </div>
-
-              {/* Deskripsi */}
-              <p className='md:text-md text-sm leading-7 md:leading-[30px]'>
-                Building the structure of web pages with semantic markup for
-                accessibility .
-              </p>
-            </div>
-
-            {/* Progress Bar */}
-            <div className='gap-xl flex'>
-              <Progress value={90} className='my-auto rounded-full' />
-              <span className='md:text-md text-sm leading-7 font-semibold md:leading-[30px]'>
-                90%
-              </span>
-            </div>
-          </CustomCard>
-
-          {/* Card 3 */}
-          <CustomCard className='md:p-xl p-lg flex h-[172px] flex-col shadow-md shadow-[#A5A5A533] md:h-[185px]'>
-            {/* Text Desc */}
-            <div className='gap-md flex flex-col'>
-              {/* Judul */}
-              <div className='gap-lg flex'>
-                <div className='flex-center size-10 rounded-full bg-neutral-100'>
-                  <Image
-                    src='/images/ES1.svg'
-                    alt='skill3'
-                    width={25}
-                    height={100}
-                  />
-                </div>
-                <div className='gap-md flex flex-col'>
-                  <h3 className='text-md my-auto leading-[30px] font-semibold md:text-lg md:leading-[32px]'>
-                    Javascript
-                  </h3>
-                </div>
-              </div>
-
-              {/* Deskripsi */}
-              <p className='md:text-md text-sm leading-7 md:leading-[30px]'>
-                Building the structure of web pages with semantic markup for
-                accessibility .
-              </p>
-            </div>
-
-            {/* Progress Bar */}
-            <div className='gap-xl flex'>
-              <Progress value={90} className='my-auto rounded-full' />
-              <span className='md:text-md text-sm leading-7 font-semibold md:leading-[30px]'>
-                90%
-              </span>
-            </div>
-          </CustomCard>
-
-          {/* Card 4 */}
-          <CustomCard className='md:p-xl p-lg hidden h-[172px] flex-col shadow-md shadow-[#A5A5A533] md:flex md:h-[185px]'>
-            {/* Text Desc */}
-            <div className='gap-md flex flex-col'>
-              {/* Judul */}
-              <div className='gap-lg flex'>
-                <div className='flex-center size-10 rounded-full bg-neutral-100'>
-                  <Image
-                    src='/images/ES6.svg'
-                    alt='skill4'
-                    width={25}
-                    height={100}
-                  />
-                </div>
-                <div className='gap-md flex flex-col'>
-                  <h3 className='text-md my-auto leading-[30px] font-semibold md:text-lg md:leading-[32px]'>
-                    React JS
-                  </h3>
-                </div>
-              </div>
-
-              {/* Deskripsi */}
-              <p className='md:text-md text-sm leading-7 md:leading-[30px]'>
-                Building the structure of web pages with semantic markup for
-                accessibility .
-              </p>
-            </div>
-
-            {/* Progress Bar */}
-            <div className='gap-xl flex'>
-              <Progress value={90} className='my-auto rounded-full' />
-              <span className='md:text-md text-sm leading-7 font-semibold md:leading-[30px]'>
-                90%
-              </span>
-            </div>
-          </CustomCard>
-
-          {/* Card 5 */}
-          <CustomCard className='md:p-xl p-lg hidden h-[172px] flex-col shadow-md shadow-[#A5A5A533] md:flex md:h-[185px]'>
-            {/* Text Desc */}
-            <div className='gap-md flex flex-col'>
-              {/* Judul */}
-              <div className='gap-lg flex'>
-                <div className='flex-center size-10 rounded-full bg-neutral-100'>
-                  <Image
-                    src='/images/ES9.svg'
-                    alt='skill5'
-                    width={25}
-                    height={100}
-                  />
-                </div>
-                <div className='gap-md flex flex-col'>
-                  <h3 className='text-md my-auto leading-[30px] font-semibold md:text-lg md:leading-[32px]'>
-                    Mango DB
-                  </h3>
-                </div>
-              </div>
-
-              {/* Deskripsi */}
-              <p className='md:text-md text-sm leading-7 md:leading-[30px]'>
-                Building the structure of web pages with semantic markup for
-                accessibility .
-              </p>
-            </div>
-
-            {/* Progress Bar */}
-            <div className='gap-xl flex'>
-              <Progress value={90} className='my-auto rounded-full' />
-              <span className='md:text-md text-sm leading-7 font-semibold md:leading-[30px]'>
-                90%
-              </span>
-            </div>
-          </CustomCard>
-
-          {/* Card 6 */}
-          <CustomCard className='md:p-xl p-lg hidden h-[172px] flex-col shadow-md shadow-[#A5A5A533] md:flex md:h-[185px]'>
-            {/* Text Desc */}
-            <div className='gap-md flex flex-col'>
-              {/* Judul */}
-              <div className='gap-lg flex'>
-                <div className='flex-center size-10 rounded-full bg-neutral-100'>
-                  <Image
-                    src='/images/ES7.svg'
-                    alt='skill6'
-                    width={25}
-                    height={100}
-                  />
-                </div>
-                <div className='gap-md flex flex-col'>
-                  <h3 className='text-md my-auto leading-[30px] font-semibold md:text-lg md:leading-[32px]'>
-                    Docker
-                  </h3>
-                </div>
-              </div>
-
-              {/* Deskripsi */}
-              <p className='md:text-md text-sm leading-7 md:leading-[30px]'>
-                Building the structure of web pages with semantic markup for
-                accessibility .
-              </p>
-            </div>
-
-            {/* Progress Bar */}
-            <div className='gap-xl flex'>
-              <Progress value={90} className='my-auto rounded-full' />
-              <span className='md:text-md text-sm leading-7 font-semibold md:leading-[30px]'>
-                90%
-              </span>
-            </div>
-          </CustomCard>
+            </CustomCard>
+          ))}
         </div>
 
         <Pagination>
           <PaginationContent>
             <PaginationItem>
-              <div className='bg-primary-200 h-[12px] w-[32px] rounded-full' />
+              <div
+                className={`h-[12px] cursor-pointer rounded-full ${currentPage === 1 ? 'bg-primary-200 w-[32px]' : 'w-[16px] bg-neutral-300'}`}
+                onClick={() => setCurrentPage(1)}
+              />
             </PaginationItem>
             <PaginationItem>
-              <div className='h-[12px] w-[16px] rounded-full bg-neutral-300' />
-            </PaginationItem>
-            <PaginationItem>
-              <div className='h-[12px] w-[16px] rounded-full bg-neutral-300' />
+              <div
+                className={`h-[12px] cursor-pointer rounded-full ${currentPage === 2 ? 'bg-primary-200 w-[32px]' : 'w-[16px] bg-neutral-300'}`}
+                onClick={() => setCurrentPage(2)}
+              />
             </PaginationItem>
           </PaginationContent>
         </Pagination>

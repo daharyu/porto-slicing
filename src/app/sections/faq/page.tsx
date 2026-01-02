@@ -1,4 +1,6 @@
+import { faqData } from '@/app/constants/faq-data';
 import CustomCard from '@/components/customCard/page';
+import imgMe from '@/../public/images/Me1.png';
 import {
   Accordion,
   AccordionContent,
@@ -8,6 +10,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { MinusCircle, PlusCircle } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const FAQPage = () => {
   return (
@@ -30,15 +33,23 @@ const FAQPage = () => {
               </h1>
             </div>
             <CustomCard className='gap-xl p-3xl hidden flex-col border border-neutral-300 bg-white md:flex md:h-fit md:w-[357px]'>
-              <div className='flex-center bg-secondary-200 size-20 overflow-hidden rounded-full'>
-                <Image src='/Me.svg' alt='faqMe' width={80} height={80} />
+              <div className='flex-center bg-secondary-200 relative size-20 overflow-hidden rounded-full'>
+                <Image
+                  src={imgMe}
+                  alt='faqMe'
+                  width={80}
+                  height={80}
+                  className='absolute -bottom-2/3 -left-1/12'
+                />
               </div>
               <p className='text-lg leading-[32px]'>
                 Have more questions? <br /> Send me a message.
               </p>
-              <Button variant='primary' className='h-12'>
-                Get in touch
-              </Button>
+              <Link href='#contact' className='w-full'>
+                <Button variant='primary' className='h-12 w-full'>
+                  Get in touch
+                </Button>
+              </Link>
             </CustomCard>
           </div>
 
@@ -46,21 +57,18 @@ const FAQPage = () => {
           <div className='my-auto w-full'>
             <Accordion
               type='single'
-              defaultValue='item-1'
+              defaultValue='item-0'
               className='w-full'
               collapsible
             >
-              {[1, 2, 3, 4, 5].map((index) => (
+              {faqData.map((item, index: number) => (
                 <AccordionItem value={`item-${index}`} key={index}>
                   <AccordionTrigger className='text-md data-[state=open]:text-primary-300 my-lg md:my-2xl flex w-full justify-between text-left leading-[30px] font-semibold md:text-xl md:leading-[34px] [&[data-state=closed]_svg[data-minus]]:hidden [&[data-state=open]_svg[data-plus]]:hidden'>
-                    What’s your approach to front-end development?
+                    {item.question}
                   </AccordionTrigger>
                   <AccordionContent className='flex flex-col gap-4 text-balance'>
                     <p className='md:text-md text-sm leading-7 text-neutral-700 md:leading-[30px]'>
-                      I focus on clean, maintainable code and prioritize user
-                      experience. My approach involves close collaboration with
-                      designers to ensure exact implementation and seamless
-                      interactions across all devices.
+                      {item.answer}
                     </p>
                   </AccordionContent>
                   <hr className='bg-neutral-300' />
@@ -76,9 +84,11 @@ const FAQPage = () => {
             <p className='text-sm leading-7'>
               Have more questions? <br /> Send me a message.
             </p>
-            <Button variant='primary' className='h-12'>
-              Get in touch
-            </Button>
+            <Link href='#contact' className='w-full'>
+              <Button variant='primary' className='h-12 w-full'>
+                Get in touch
+              </Button>
+            </Link>
           </CustomCard>
         </CustomCard>
       </section>

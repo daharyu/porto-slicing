@@ -12,13 +12,16 @@ import {
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogTrigger,
+  AlertDialogTitle,
 } from '@radix-ui/react-alert-dialog';
 import { Mail } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import Image from 'next/image';
+import meImg from '@/../public/images/Me1.png';
 import Link from 'next/link';
 import CustomCard from '../customCard/page';
 import { useEffect, useState } from 'react';
+import { AlertSuccess } from '../alertSucces';
 
 const HeaderPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -60,20 +63,20 @@ const HeaderPage = () => {
         transition={{ duration: 0.7, ease: 'easeOut' }}
       >
         {/* Logo */}
-        <div className='flex gap-[8.53px]'>
+        <Link href='/' className='flex gap-[8.53px]'>
           <Image
-            src='/logo-symbol.svg'
+            src={meImg}
             alt='logo'
-            width={27}
-            height={29}
-            className={`${isScrolled && 'invert'}`}
+            width={100}
+            height={100}
+            className={`size-8 rounded-full border object-center ${isScrolled ? 'border-neutral-950' : 'border-white'}`}
           />
           <div
             className={`leading-4xl text-[21.33px] font-semibold ${isScrolled ? 'text-neutral-950!' : 'text-white'}`}
           >
-            Your Logo
+            David H Y
           </div>
-        </div>
+        </Link>
 
         {/* Navigation */}
         <nav className='hidden md:block'>
@@ -93,38 +96,14 @@ const HeaderPage = () => {
 
         {/* Hire Me */}
         <div className='hidden md:block'>
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button
-                className={`h-[48px] w-[172px] md:flex ${isScrolled && 'invert'}`}
-              >
-                <Mail size={20} />
-                Hire Me
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent className='absolute top-0 left-0 m-0 h-screen w-full bg-black/70'>
-              <CustomCard className='md:gap-3xl p-4xl absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center bg-white md:h-fit'>
-                <Image
-                  src='/images/messageSuccess.svg'
-                  alt='success'
-                  width={232}
-                  height={190}
-                />
-                <div className='flex w-[415px] flex-col gap-2 text-center'>
-                  <h4 className='text-xl leading-[34px] font-semibold text-neutral-950'>
-                    Message Sent Successfully!
-                  </h4>
-                  <p className='text-md leading-[30px] text-neutral-500'>
-                    Thank you for reaching out. I’ll get back to you as soon as
-                    possible
-                  </p>
-                </div>
-                <AlertDialogCancel className='bg-primary-300 text-neutral-25 hover:bg-primary-300/70 h-[48px] w-[310px] rounded-full text-sm leading-7 font-medium'>
-                  Back to Home
-                </AlertDialogCancel>
-              </CustomCard>
-            </AlertDialogContent>
-          </AlertDialog>
+          <Link href='#contact'>
+            <Button
+              className={`h-[48px] w-[172px] md:flex ${isScrolled && 'invert'}`}
+            >
+              <Mail size={20} />
+              Hire Me
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile */}

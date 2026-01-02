@@ -144,7 +144,7 @@ const HeroPage = () => {
 
         {/* Frontend Developer */}
         <motion.div
-          className='gap-xxs p-lg absolute top-[600px] left-[clamp(120px,28vw,550px)] flex flex-col rounded-xl border border-[#FDFDFD]/10 bg-[#28282833]/20 backdrop-blur-md md:top-[800px] md:left-[550px]'
+          className='gap-xxs p-lg absolute top-[600px] left-[clamp(120px,28vw,550px)] flex flex-col rounded-xl border border-[#FDFDFD]/10 bg-[#28282833]/20 backdrop-blur-md md:top-[800px] md:left-[600px]'
           initial={{ rotate: 0, x: 0, y: 0 }}
           whileInView={{
             rotate: device === 'mobile' ? -10.09 : -3.24,

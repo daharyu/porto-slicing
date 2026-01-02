@@ -1,12 +1,27 @@
 'use client';
 import CustomCard from '@/components/customCard/page';
 import Marquee from 'react-fast-marquee';
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
+import meImage from '@/../public/images/Me1.png';
 import { Mail, Star, Stars } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { useRef } from 'react';
 
 const AboutMe = () => {
+  const containerRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const textY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  // const imageY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  // const patternY = useTransform(scrollYProgress, [0, 1], [-20, 20]);
+
+  const imageY = useTransform(scrollYProgress, [0, 1], [150, -150]);
+  const patternY = useTransform(scrollYProgress, [0, 1], [-200, 200]);
   return (
     <section className='section' id='about'>
       {/* Text */}
@@ -70,7 +85,7 @@ const AboutMe = () => {
                 React Expert
               </div>
               <div className='py-xs px-xl text-sn mx-3 rounded-full bg-white leading-7'>
-                5 Years Experience
+                2 Years Experience
               </div>
             </Marquee>
 
@@ -116,8 +131,8 @@ const AboutMe = () => {
           </div>
 
           {/* Cointainer */}
-          <div className='absolute top-3/5 left-1/2 grid w-[333px] -translate-x-1/2 grid-cols-5 gap-6'>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((data, index) => (
+          <div className='absolute top-3/5 left-1/2 grid w-[333px] -translate-x-1/2 grid-cols-4 gap-6'>
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((data, index) => (
               <motion.div
                 key={data}
                 className='flex-center size-[52.58px] rounded-full bg-neutral-800'
@@ -140,10 +155,10 @@ const AboutMe = () => {
         </CustomCard>
 
         {/* Card 3 */}
-        <CustomCard className='relative bg-[url(/images/5XP.png)]'>
+        <CustomCard className='relative bg-[url(/images/5XP.png)] bg-cover bg-center'>
           <div className='gap-md md:gap-xl flex-center m-6 flex h-1/2 flex-col text-center text-white'>
             <h5 className='text-display-sm md:text-display-md z-10 leading-[38px] font-bold md:leading-[46px] md:tracking-tight'>
-              5+ Years
+              2+ Years
               <br />
               Experience
             </h5>
@@ -178,32 +193,46 @@ const AboutMe = () => {
         </CustomCard>
 
         {/* Card 4 */}
-        <CustomCard className='bg-primary-300 relative overflow-hidden'>
-          <div className='gap-md md:gap-xl flex-center m-6 flex h-2/3 flex-col text-center text-[#F39C3F]'>
-            <h3 className='text-[71.63px] leading-[90px] font-bold md:leading-[46px] md:tracking-tight'>
-              EDWIN
+        <CustomCard
+          ref={containerRef}
+          className='bg-primary-300 relative overflow-hidden'
+        >
+          <motion.div
+            style={{ y: textY }}
+            className='gap-md md:gap-xl flex-center z-20 m-6 flex h-2/3 flex-col items-end text-[#F39C3F]'
+          >
+            <h3 className='text-right text-[71.63px] leading-[90px] font-bold md:leading-[46px] md:tracking-tight'>
+              David
               <br /> <br />
-              ANDERSON
+              Harrison
             </h3>
-          </div>
+          </motion.div>
 
-          {/* Me */}
-          <Image
-            src='/Me.svg'
-            alt='Me'
-            width={700}
-            height={700}
-            className='absolute bottom-0 left-1/2 z-10 -translate-x-1/2'
-          />
+          {/* Me Image - Fast Parallax */}
+          <motion.div
+            style={{ y: imageY, x: '-50%' }} // Keep the horizontal centering
+            className='absolute -bottom-1/2 left-1/4 z-10'
+          >
+            <Image
+              src={meImage} // Replace with your meImage variable
+              alt='Me'
+              width={500}
+              height={500}
+            />
+          </motion.div>
 
-          {/* Pattern */}
-          <Image
-            src='/images/Pattern.svg'
-            alt='Pattern'
-            width={1000}
-            height={1000}
-            className='absolute top-1/2 left-1/2 z-0 -translate-x-1/2 -translate-y-1/2'
-          />
+          {/* Pattern - Slow Inverse Parallax */}
+          <motion.div
+            style={{ y: patternY, x: '-50%', translateY: '-50%' }}
+            className='absolute top-1/2 left-1/2 z-0 opacity-50'
+          >
+            <Image
+              src='/images/Pattern.svg'
+              alt='Pattern'
+              width={1000}
+              height={1000}
+            />
+          </motion.div>
 
           {/* Hire Me */}
           <Button className='absolute bottom-6 left-1/2 z-20 h-[48px] w-[172px] -translate-x-1/2'>
@@ -226,7 +255,7 @@ const AboutMe = () => {
           {/* Text */}
           <div className='gap-3xl m-6 flex w-[170px] flex-col justify-between md:w-[720px] md:flex-row md:gap-[39px] md:pt-[100px]'>
             <div className='text-neutral-25 flex flex-col'>
-              <h3 className='md:text-display-2xl text-display-lg leading-[48px] font-bold md:leading-[60px] md:tracking-tight'>
+              {/* <h3 className='md:text-display-2xl text-display-lg leading-[48px] font-bold md:leading-[60px] md:tracking-tight'>
                 50+
               </h3>
               <p className='text-sm leading-7 font-medium md:text-lg md:leading-8'>
@@ -249,7 +278,7 @@ const AboutMe = () => {
               </h3>
               <p className='text-sm leading-7 font-medium md:text-lg md:leading-8'>
                 Project Delivered
-              </p>
+              </p> */}
             </div>
           </div>
 
@@ -262,7 +291,7 @@ const AboutMe = () => {
             className='absolute top-1/2 -translate-y-1/2 opacity-10 md:right-0 md:h-[400px] md:w-[500px]'
           />
           {/* Flag */}
-          <motion.div>
+          {/* <motion.div>
             <Image
               src='/images/indo.svg'
               alt='Flag'
@@ -284,7 +313,7 @@ const AboutMe = () => {
               height={32}
               className='absolute top-1/2 right-1/12 md:top-1/3 md:right-1/2'
             />
-          </motion.div>
+          </motion.div> */}
         </CustomCard>
       </div>
     </section>

@@ -19,7 +19,7 @@ const WorkPage = () => {
         {/* Container */}
         <div className='gap-5xl grid grid-cols-1 md:grid-cols-3'>
           {/* Dashboard1 */}
-          {[1, 2, 3, 4, 5, 6].map((data, index) => (
+          {[1, 2, 3].map((data, index) => (
             <div className='gap-xl md:gap-2xl flex flex-col' key={index}>
               {/* Up */}
               <div className='flex justify-between'>
@@ -47,14 +47,16 @@ const WorkPage = () => {
 
               {/* Link */}
               <div className='gap-md text-primary-300 md:text-md flex text-sm leading-7 font-medium md:leading-[30px]'>
-                <Link href='/'>Visite Website</Link>
+                <Link href='https://project-social-media-phi.vercel.app/'>
+                  Visite Website
+                </Link>
                 <ArrowRight color='#6600EB' size={24} />
               </div>
             </div>
           ))}
         </div>
 
-        <Pagination>
+        {/* <Pagination>
           <PaginationContent>
             <PaginationItem>
               <div className='bg-primary-200 h-[12px] w-[32px] rounded-full' />
@@ -66,7 +68,7 @@ const WorkPage = () => {
               <div className='h-[12px] w-[16px] rounded-full bg-neutral-300' />
             </PaginationItem>
           </PaginationContent>
-        </Pagination>
+        </Pagination> */}
       </section>
     </>
   );
