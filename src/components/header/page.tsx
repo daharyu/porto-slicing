@@ -5,6 +5,7 @@ import {
   Sheet,
   SheetContent,
   SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
 import {
@@ -114,10 +115,11 @@ const HeaderPage = () => {
               alt='menu'
               width={24}
               height={24}
-              className='block md:hidden'
+              className={`block md:hidden ${isScrolled ? 'invert' : ''}`}
             ></Image>
           </SheetTrigger>
           <SheetContent className='w-full'>
+            <SheetTitle className='hidden'></SheetTitle>
             <SheetHeader>
               {/* Logo */}
               <div className='flex h-20 items-center gap-[8.53px]'>

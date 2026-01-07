@@ -7,6 +7,7 @@ import { Mail, Star, Stars } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { useRef } from 'react';
+import Link from 'next/link';
 
 const AboutMe = () => {
   const containerRef = useRef(null);
@@ -40,7 +41,7 @@ const AboutMe = () => {
       </div>
 
       {/* Container */}
-      <div className='gap-xl md:gap-2xl grid w-full grid-cols-1 md:grid-cols-3'>
+      <div className='gap-xl md:gap-2xl grid w-full grid-cols-1 md:grid-cols-2'>
         {/* Card 1 */}
         <CustomCard className='bg-secondary-300 relative'>
           <div className='gap-md md:gap-xl m-6 flex flex-col text-white'>
@@ -167,13 +168,13 @@ const AboutMe = () => {
           {/* Gradient */}
           <div className='absolute top-0 size-full rounded-xl bg-linear-to-t from-black to-transparent/0 md:rounded-2xl' />
           {/* Container */}
-          <div className='flex-center gap-lg absolute top-4/6 left-1/2 z-10 -translate-x-1/2'>
+          {/* <div className='flex-center gap-lg absolute top-4/6 left-1/2 z-10 -translate-x-1/2'>
             <Image
               src='/images/Work1.svg'
               alt='5XP'
               width={95}
               height={71}
-              className='rounded-md'
+              className='rounded-md object-fill'
             />
             <Image
               src='/images/Work2.svg'
@@ -189,7 +190,7 @@ const AboutMe = () => {
               height={71}
               className='rounded-md'
             />
-          </div>
+          </div> */}
         </CustomCard>
 
         {/* Card 4 */}
@@ -201,7 +202,7 @@ const AboutMe = () => {
             style={{ y: textY }}
             className='gap-md md:gap-xl flex-center z-20 m-6 flex h-2/3 flex-col items-end text-[#F39C3F]'
           >
-            <h3 className='text-right text-[71.63px] leading-[90px] font-bold md:leading-[46px] md:tracking-tight'>
+            <h3 className='text-right text-[71.63px] leading-[35px] font-bold md:leading-[46px] md:tracking-tight'>
               David
               <br /> <br />
               Harrison
@@ -211,7 +212,7 @@ const AboutMe = () => {
           {/* Me Image - Fast Parallax */}
           <motion.div
             style={{ y: imageY, x: '-50%' }} // Keep the horizontal centering
-            className='absolute -bottom-1/2 left-1/4 z-10'
+            className='absolute top-0 left-1/4 z-10'
           >
             <Image
               src={meImage} // Replace with your meImage variable
@@ -235,14 +236,16 @@ const AboutMe = () => {
           </motion.div>
 
           {/* Hire Me */}
-          <Button className='absolute bottom-6 left-1/2 z-20 h-[48px] w-[172px] -translate-x-1/2'>
-            <Mail size={20} />
-            Hire Me
-          </Button>
+          <Link href='#contact'>
+            <Button className='absolute bottom-6 left-1/2 z-20 h-[48px] w-[172px] -translate-x-1/2'>
+              <Mail size={20} />
+              Hire Me
+            </Button>
+          </Link>
         </CustomCard>
 
         {/* Card 5 */}
-        <CustomCard className='relative h-[452px] overflow-hidden bg-linear-to-r from-[#002C6E] to-[#0C4EAF] md:col-span-2'>
+        {/* <CustomCard className='relative h-[452px] overflow-hidden bg-linear-to-r from-[#002C6E] to-[#0C4EAF] md:col-span-2'>
           <div className='gap-md md:gap-xl m-6 flex flex-col text-white'>
             <h5 className='text-display-sm md:text-display-md z-10 leading-[38px] font-bold md:leading-[46px] md:tracking-tight'>
               Building Digital
@@ -253,45 +256,45 @@ const AboutMe = () => {
           </div>
 
           {/* Text */}
-          <div className='gap-3xl m-6 flex w-[170px] flex-col justify-between md:w-[720px] md:flex-row md:gap-[39px] md:pt-[100px]'>
-            <div className='text-neutral-25 flex flex-col'>
-              {/* <h3 className='md:text-display-2xl text-display-lg leading-[48px] font-bold md:leading-[60px] md:tracking-tight'>
-                50+
-              </h3>
-              <p className='text-sm leading-7 font-medium md:text-lg md:leading-8'>
-                Global Client’s Handle
-              </p>
-            </div>
-
-            <div className='text-neutral-25 flex flex-col'>
-              <h3 className='md:text-display-2xl text-display-lg leading-[48px] font-bold md:leading-[60px] md:tracking-tight'>
-                99%
-              </h3>
-              <p className='text-sm leading-7 font-medium md:text-lg md:leading-8'>
-                Client Satisfaction Rate
-              </p>
-            </div>
-
-            <div className='text-neutral-25 flex flex-col'>
-              <h3 className='md:text-display-2xl text-display-lg leading-[48px] font-bold md:leading-[60px] md:tracking-tight'>
-                100+
-              </h3>
-              <p className='text-sm leading-7 font-medium md:text-lg md:leading-8'>
-                Project Delivered
-              </p> */}
-            </div>
+        <div className='gap-3xl m-6 flex w-[170px] flex-col justify-between md:w-[720px] md:flex-row md:gap-[39px] md:pt-[100px]'>
+          <div className='text-neutral-25 flex flex-col'>
+            <h3 className='md:text-display-2xl text-display-lg leading-[48px] font-bold md:leading-[60px] md:tracking-tight'>
+              50+
+            </h3>
+            <p className='text-sm leading-7 font-medium md:text-lg md:leading-8'>
+              Global Client’s Handle
+            </p>
           </div>
 
-          {/* Globe */}
-          <Image
-            src='/images/world.svg'
-            alt='Globe'
-            width={700}
-            height={700}
-            className='absolute top-1/2 -translate-y-1/2 opacity-10 md:right-0 md:h-[400px] md:w-[500px]'
-          />
-          {/* Flag */}
-          {/* <motion.div>
+          <div className='text-neutral-25 flex flex-col'>
+            <h3 className='md:text-display-2xl text-display-lg leading-[48px] font-bold md:leading-[60px] md:tracking-tight'>
+              99%
+            </h3>
+            <p className='text-sm leading-7 font-medium md:text-lg md:leading-8'>
+              Client Satisfaction Rate
+            </p>
+          </div>
+
+          <div className='text-neutral-25 flex flex-col'>
+            <h3 className='md:text-display-2xl text-display-lg leading-[48px] font-bold md:leading-[60px] md:tracking-tight'>
+              5+
+            </h3>
+            <p className='text-sm leading-7 font-medium md:text-lg md:leading-8'>
+              Project Delivered
+            </p>
+          </div>
+        </div>
+
+        {/* Globe */}
+        <Image
+          src='/images/world.svg'
+          alt='Globe'
+          width={700}
+          height={700}
+          className='absolute top-1/2 -translate-y-1/2 opacity-10 md:right-0 md:h-[400px] md:w-[500px]'
+        />
+        {/* Flag */}
+        {/* <motion.div>
             <Image
               src='/images/indo.svg'
               alt='Flag'
@@ -313,8 +316,8 @@ const AboutMe = () => {
               height={32}
               className='absolute top-1/2 right-1/12 md:top-1/3 md:right-1/2'
             />
-          </motion.div> */}
-        </CustomCard>
+          </motion.div> 
+        </CustomCard> */}
       </div>
     </section>
   );
